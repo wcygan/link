@@ -2,9 +2,9 @@ version: v1
 managed:
   enabled: true
   go_package_prefix:
-    default: github.com/wcygan/link
+    default: github.com/wcygan/link/generated/go
 plugins:
-  - plugin: buf.build/bufbuild/connect-go:v1.10.0
+  - plugin: buf.build/connectrpc/go:v1.16.2
     out: generated/go
     opt:
       - paths=source_relative
