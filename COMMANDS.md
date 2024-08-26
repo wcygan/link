@@ -6,10 +6,16 @@ buf generate proto
 
 ## Start Server
 
-Run within the [server](server) directory:
+From the root:
 
 ```bash
-go run server/cmd/main.go
+go run -C server cmd/main.go
+```
+
+From within the [server](server) directory:
+
+```bash
+go run cmd/main.go
 ```
 
 ## Curl

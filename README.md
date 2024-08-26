@@ -1,0 +1,1 @@
+go run -C server cmd/main.go
