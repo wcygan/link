@@ -4,17 +4,17 @@ metadata:
   name: app
 build:
   artifacts:
-  - image: linkservice
-    context: .
-    docker:
-      dockerfile: server/Dockerfile
+    - image: linkservice
+      context: .
+      docker:
+        dockerfile: server/Dockerfile
   tagPolicy:
     gitCommit: {}
   local:
     useBuildkit: true
 manifests:
   rawYaml:
-  - kubernetes-manifests/*.yaml
+    - kubernetes-manifests/*.yaml
 deploy:
   kubectl: {}
 portForward:
