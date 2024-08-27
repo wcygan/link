@@ -1,0 +1,24 @@
+apiVersion: skaffold/v3
+kind: Config
+metadata:
+  name: app
+build:
+  artifacts:
+  - image: linkservice
+    context: .
+    docker:
+      dockerfile: server/Dockerfile
+  tagPolicy:
+    gitCommit: {}
+  local:
+    useBuildkit: true
+manifests:
+  rawYaml:
+  - kubernetes-manifests/*.yaml
+deploy:
+  kubectl: {}
+portForward:
+  - resourceType: service
+    resourceName: linkservice
+    port: 8080
+    localPort: 8080
