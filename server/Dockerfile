@@ -9,13 +9,24 @@ RUN buf generate proto
 FROM golang:1.22-alpine as builder
 RUN apk add --no-cache git
 WORKDIR /app
-# Copy the entire project structure
-COPY . .
-# Copy generated protobuf code
+
+# Copy go.mod and go.sum files
+COPY server/go.mod server/go.sum ./server/
+COPY generated/go/go.mod generated/go/go.sum ./generated/go/
+
+# Copy the generated protobuf code
 COPY --from=bufbuild /app/generated ./generated
+
+# Set WORKDIR to server directory
 WORKDIR /app/server
-# Update go.mod to use the local generated code
-RUN go mod edit -replace github.com/wcygan/link/generated/go=../generated/go
+
+# Download dependencies
+RUN go mod download
+
+# Copy the server source code
+COPY server .
+
+# Build the application
 RUN --mount=type=cache,target=/root/.cache/go-build \
     CGO_ENABLED=0 GOOS=linux go build -o server ./cmd/main.go
 
