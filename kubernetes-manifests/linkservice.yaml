@@ -16,6 +16,9 @@ spec:
         image: linkservice
         ports:
         - containerPort: 8080
+        env:
+        - name: DATABASE_URL
+          value: "postgres://urluser:urlpass@postgres:5432/urlshortener"
 ---
 apiVersion: v1
 kind: Service

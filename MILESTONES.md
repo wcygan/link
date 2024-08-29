@@ -15,8 +15,8 @@
 
 ## Milestone 3: The Server is connected to Postgres
 
-- [ ] The server connects to Postgres
-- [ ] The server has an algorithm for shortening URLs which
-- [ ] The server can create a new short URL (curl /link.v1.UrlShortenerService/ShortenUrl) (server/cmd/main.go)
-- [ ] The server can retrieve a long URL from a short URL (curl /link.v1.UrlShortenerService/GetOriginalUrl) (server/cmd/main.go)
-- [ ] Running curl against the server returns the expected results (COMMANDS.md)
+- [x] The server connects to Postgres
+- [x] The server has an algorithm for shortening URLs which
+- [x] The server can create a new short URL (curl /link.v1.UrlShortenerService/ShortenUrl) (server/cmd/main.go)
+- [x] The server can retrieve a long URL from a short URL (curl /link.v1.UrlShortenerService/GetOriginalUrl) (server/cmd/main.go)
+- [x] Running curl against the server returns the expected results (COMMANDS.md)

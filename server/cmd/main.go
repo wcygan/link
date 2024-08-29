@@ -5,8 +5,12 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
+	"crypto/rand"
+	"encoding/base64"
 
 	"connectrpc.com/connect"
+	"github.com/jackc/pgx/v5/pgxpool"
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/h2c"
 
@@ -15,6 +19,7 @@ import (
 )
 
 type UrlShortenerServer struct {
+	db *pgxpool.Pool
 }
 
 func (s *UrlShortenerServer) ShortenUrl(
@@ -22,8 +27,19 @@ func (s *UrlShortenerServer) ShortenUrl(
 	req *connect.Request[v1.ShortenUrlRequest],
 ) (*connect.Response[v1.ShortenUrlResponse], error) {
 	log.Println("Request headers: ", req.Header())
-	// TODO: Implement actual URL shortening logic
-	shortenedURL := "http://short.url/" + req.Msg.OriginalUrl[:5]
+	
+	shortCode, err := generateShortCode()
+	if err != nil {
+		return nil, connect.NewError(connect.CodeInternal, fmt.Errorf("failed to generate short code: %w", err))
+	}
+
+	shortenedURL := fmt.Sprintf("http://short.url/%s", shortCode)
+
+	_, err = s.db.Exec(ctx, "INSERT INTO urls (short_code, original_url) VALUES ($1, $2)", shortCode, req.Msg.OriginalUrl)
+	if err != nil {
+		return nil, connect.NewError(connect.CodeInternal, fmt.Errorf("failed to insert URL: %w", err))
+	}
+
 	res := connect.NewResponse(&v1.ShortenUrlResponse{
 		ShortenedUrl: shortenedURL,
 	})
@@ -36,8 +52,15 @@ func (s *UrlShortenerServer) GetOriginalUrl(
 	req *connect.Request[v1.GetOriginalUrlRequest],
 ) (*connect.Response[v1.GetOriginalUrlResponse], error) {
 	log.Println("Request headers: ", req.Header())
-	// TODO: Implement actual URL retrieval logic
-	originalURL := "http://original.url/" + req.Msg.ShortenedUrl[len("http://short.url/"):]
+	
+	shortCode := req.Msg.ShortenedUrl[len("http://short.url/"):]
+
+	var originalURL string
+	err := s.db.QueryRow(ctx, "SELECT original_url FROM urls WHERE short_code = $1", shortCode).Scan(&originalURL)
+	if err != nil {
+		return nil, connect.NewError(connect.CodeNotFound, fmt.Errorf("URL not found: %w", err))
+	}
+
 	res := connect.NewResponse(&v1.GetOriginalUrlResponse{
 		OriginalUrl: originalURL,
 	})
@@ -45,14 +68,54 @@ func (s *UrlShortenerServer) GetOriginalUrl(
 	return res, nil
 }
 
+func generateShortCode() (string, error) {
+	b := make([]byte, 6)
+	_, err := rand.Read(b)
+	if err != nil {
+		return "", err
+	}
+	return base64.URLEncoding.EncodeToString(b)[:6], nil
+}
+
 func main() {
-	urlShortener := &UrlShortenerServer{}
+	// Get database connection string from environment variable
+	dbURL := os.Getenv("DATABASE_URL")
+	if dbURL == "" {
+		log.Fatal("DATABASE_URL environment variable is not set")
+	}
+
+	// Create a connection pool
+	poolConfig, err := pgxpool.ParseConfig(dbURL)
+	if err != nil {
+		log.Fatalf("Failed to parse database URL: %v", err)
+	}
+
+	pool, err := pgxpool.NewWithConfig(context.Background(), poolConfig)
+	if err != nil {
+		log.Fatalf("Failed to create connection pool: %v", err)
+	}
+	defer pool.Close()
+
+	// Create the table if it doesn't exist
+	_, err = pool.Exec(context.Background(), `
+		CREATE TABLE IF NOT EXISTS urls (
+			id SERIAL PRIMARY KEY,
+			short_code TEXT UNIQUE NOT NULL,
+			original_url TEXT NOT NULL,
+			created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+		)
+	`)
+	if err != nil {
+		log.Fatalf("Failed to create table: %v", err)
+	}
+
+	urlShortener := &UrlShortenerServer{db: pool}
 	mux := http.NewServeMux()
 	path, handler := linkv1connect.NewUrlShortenerServiceHandler(urlShortener)
 	mux.Handle(path, handler)
 
 	fmt.Println("Server starting on :8080")
-	err := http.ListenAndServe(
+	err = http.ListenAndServe(
 		"localhost:8080",
 		// Use h2c so we can serve HTTP/2 without TLS.
 		h2c.NewHandler(mux, &http2.Server{}),
