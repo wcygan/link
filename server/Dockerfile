@@ -23,6 +23,10 @@ WORKDIR /app/server
 # Download dependencies
 RUN go mod download
 
+# Add golang-migrate tool and migrations
+RUN go install -tags 'postgres' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
+COPY server/migrations ./migrations
+
 # Copy the server source code
 COPY server .
 
@@ -35,4 +39,6 @@ FROM alpine:3.20.1
 RUN apk --no-cache add ca-certificates
 WORKDIR /app
 COPY --from=builder /app/server/server .
+COPY --from=builder /app/server/migrations ./migrations
+COPY --from=builder /go/bin/migrate /usr/local/bin/migrate
 CMD ["./server"]

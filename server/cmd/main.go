@@ -96,17 +96,9 @@ func main() {
 	}
 	defer pool.Close()
 
-	// Create the table if it doesn't exist
-	_, err = pool.Exec(context.Background(), `
-		CREATE TABLE IF NOT EXISTS urls (
-			id SERIAL PRIMARY KEY,
-			short_code TEXT UNIQUE NOT NULL,
-			original_url TEXT NOT NULL,
-			created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-		)
-	`)
-	if err != nil {
-		log.Fatalf("Failed to create table: %v", err)
+	// Verify database connection and schema
+	if err := verifyDatabaseSchema(pool); err != nil {
+		log.Fatalf("Database schema verification failed: %v", err)
 	}
 
 	urlShortener := &UrlShortenerServer{db: pool}
@@ -123,4 +115,17 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to start server: %v", err)
 	}
+}
+
+func verifyDatabaseSchema(pool *pgxpool.Pool) error {
+	ctx := context.Background()
+	var tableExists bool
+	err := pool.QueryRow(ctx, "SELECT EXISTS (SELECT FROM information_schema.tables WHERE table_name = 'urls')").Scan(&tableExists)
+	if err != nil {
+		return fmt.Errorf("failed to check if table exists: %w", err)
+	}
+	if !tableExists {
+		return fmt.Errorf("urls table does not exist")
+	}
+	return nil
 }
