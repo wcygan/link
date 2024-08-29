@@ -1,15 +1,15 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: linkservice
+  name: link-server
 spec:
   selector:
     matchLabels:
-      app: linkservice
+      app: link-server
   template:
     metadata:
       labels:
-        app: linkservice
+        app: link-server
     spec:
       initContainers:
       - name: wait-for-postgres
@@ -22,8 +22,8 @@ spec:
         - '-c'
         - 'kubectl wait --for=condition=complete job/db-migrate --timeout=5m'
       containers:
-      - name: server
-        image: linkservice
+      - name: link-server
+        image: link-server
         ports:
         - containerPort: 8080
         env:
@@ -64,11 +64,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: linkservice
+  name: link-server
 spec:
   type: ClusterIP
   selector:
-    app: linkservice
+    app: link-server
   ports:
   - port: 8080
     targetPort: 8080

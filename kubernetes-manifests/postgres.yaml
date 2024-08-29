@@ -137,7 +137,7 @@ spec:
     spec:
       containers:
       - name: db-migrate
-        image: linkservice
+        image: link-server
         command: ["/app/migrate"]
         args: ["-path", "/app/migrations", "-database", "$(DATABASE_URL)", "up"]
         env:
