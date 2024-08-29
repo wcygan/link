@@ -132,10 +132,8 @@ kind: Job
 metadata:
   name: db-migrate
 spec:
-  backoffLimit: 5
   template:
     spec:
-      serviceAccountName: db-migrate-sa
       containers:
       - name: db-migrate
         image: linkservice
