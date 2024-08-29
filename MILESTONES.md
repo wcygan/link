@@ -17,7 +17,6 @@
 ## Milestone 2: Performance Optimization
 - [ ] Implement Redis caching layer for frequently accessed URLs
 - [ ] Optimize database queries and add appropriate indexes
-- [ ] Implement asynchronous processing for non-critical tasks
 - [ ] Set up horizontal pod autoscaling for the linkservice deployment
 
 ## Milestone 3: High Availability and Scalability
