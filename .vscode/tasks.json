@@ -109,7 +109,7 @@
         },
         {
             "type": "shell",
-            "label": "Shorten Default URL",
+            "label": "curl: Shorten Default URL",
             "command": "curl --header \"Content-Type: application/json\" --data '{\"original_url\": \"https://www.example.com/default/long/url\"}' http://localhost:8080/link.v1.UrlShortenerService/ShortenUrl",
             "problemMatcher": [],
             "presentation": {
