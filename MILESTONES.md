@@ -27,12 +27,13 @@
 - [ ] Implement a message queue (e.g., RabbitMQ or Apache Kafka) for handling high-volume URL creation requests
 
 ## Milestone 4: User Authentication and Management
-- [ ] Implement user registration and login functionality
-- [ ] Create user dashboard for managing shortened URLs
-- [ ] Implement API rate limiting based on user authentication token
+- [ ] Implement user registration and login functionality (create a new microservice for this, optionally use a new postgres instance)
+- [ ] Implement API authentication (use redis to store tokens and validate them)
+- [ ] Implement API rate limiting based on user authentication token 
 - [ ] Add ability for users to create custom short URLs
 - [ ] Implement a password reset functionality
 - [ ] Implement URL expiration functionality
+- [ ] Create user dashboard for managing shortened URLs
 
 ## Milestone 5: Web Frontend
 - [ ] Set up a Svelte project using SvelteKit
