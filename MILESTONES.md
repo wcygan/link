@@ -2,10 +2,10 @@
 
 ## Milestone 1: The server runs on Kubernetes
 
-- [ ] The server has a Dockerfile (server/Dockerfile)
-- [ ] The server runs on Kubernetes (kubernetes-manifests/linkserver.yaml)
-- [ ] The server is accessible from outside the cluster
-- [ ] The server is accessible from inside the cluster via port forwarding
+- [x] The server has a Dockerfile (server/Dockerfile)
+- [x] The server runs on Kubernetes (kubernetes-manifests/linkserver.yaml)
+- [x] The server is accessible from outside the cluster
+- [x] The server is accessible from inside the cluster via port forwarding
 
 ## Milestone 2: Postgres is running on Kubernetes (but not connected to the server)
 
