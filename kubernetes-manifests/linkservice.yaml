@@ -12,16 +12,12 @@ spec:
         app: linkservice
     spec:
       initContainers:
-      - name: db-migrate
-        image: linkservice
-        command: ["migrate"]
-        args: ["-path", "/app/migrations", "-database", "$(DATABASE_URL)", "up"]
-        env:
-        - name: DATABASE_URL
-          valueFrom:
-            secretKeyRef:
-              name: db-secrets
-              key: url
+      - name: wait-for-migration
+        image: bitnami/kubectl
+        command:
+        - 'sh'
+        - '-c'
+        - 'kubectl wait --for=condition=complete job/db-migrate --timeout=5m'
       containers:
       - name: server
         image: linkservice
@@ -33,12 +29,27 @@ spec:
             secretKeyRef:
               name: db-secrets
               key: url
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 500m
+            memory: 256Mi
         readinessProbe:
           httpGet:
             path: /healthz
             port: 8080
-          initialDelaySeconds: 5
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          failureThreshold: 3
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 15
           periodSeconds: 10
+          failureThreshold: 3
 ---
 apiVersion: v1
 kind: Service

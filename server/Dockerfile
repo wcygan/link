@@ -34,11 +34,23 @@ COPY server .
 RUN --mount=type=cache,target=/root/.cache/go-build \
     CGO_ENABLED=0 GOOS=linux go build -o server ./cmd/main.go
 
-# Stage 3: Create the final minimal image
-FROM alpine:3.20.1
-RUN apk --no-cache add ca-certificates
+# Final stage
+FROM alpine:3.14
+
+# Install ca-certificates for HTTPS requests and tzdata for timezone data
+RUN apk add --no-cache ca-certificates tzdata
+
+# Set the working directory
 WORKDIR /app
+
+# Copy the built binary from the builder stage
 COPY --from=builder /app/server/server .
+
+# Copy the migration files
 COPY --from=builder /app/server/migrations ./migrations
-COPY --from=builder /go/bin/migrate /usr/local/bin/migrate
+
+# Copy the migrate binary
+COPY --from=builder /go/bin/migrate .
+
+# Set the command to run the server
 CMD ["./server"]
