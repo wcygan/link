@@ -1,7 +1,32 @@
 [
   {
+    "label": "Minikube: Start",
+    "command": "minikube start",
+    "reveal": "always",
+    "allow_concurrent_runs": false
+  },
+  {
+    "label": "Minikube: Stop",
+    "command": "minikube stop",
+    "reveal": "always",
+    "allow_concurrent_runs": false
+  },
+  {
+    "label": "Minikube: Status",
+    "command": "minikube status",
+    "reveal": "always",
+    "allow_concurrent_runs": true
+  },
+  {
     "label": "Skaffold Dev",
     "command": "skaffold dev",
+    "cwd": "${ZED_WORKTREE_ROOT}",
+    "reveal": "always",
+    "allow_concurrent_runs": false
+  },
+  {
+    "label": "Skaffold: Delete Resources",
+    "command": "skaffold delete",
     "cwd": "${ZED_WORKTREE_ROOT}",
     "reveal": "always",
     "allow_concurrent_runs": false
@@ -35,6 +60,78 @@
   {
     "label": "Shorten Default URL",
     "command": "curl --header \"Content-Type: application/json\" --data '{\"original_url\": \"https://www.example.com/default/long/url\"}' http://localhost:8080/link.v1.UrlShortenerService/ShortenUrl",
+    "reveal": "always",
+    "allow_concurrent_runs": true
+  },
+  {
+    "label": "Docker: List Images",
+    "command": "docker images",
+    "reveal": "always",
+    "allow_concurrent_runs": true
+  },
+  {
+    "label": "Docker: List Running Containers",
+    "command": "docker ps",
+    "reveal": "always",
+    "allow_concurrent_runs": true
+  },
+  {
+    "label": "Docker: List All Containers",
+    "command": "docker ps -a",
+    "reveal": "always",
+    "allow_concurrent_runs": true
+  },
+  {
+    "label": "Docker: Prune Unused Images",
+    "command": "docker image prune -a --force",
+    "reveal": "always",
+    "allow_concurrent_runs": false
+  },
+  {
+    "label": "Docker: Prune Unused Containers",
+    "command": "docker container prune --force",
+    "reveal": "always",
+    "allow_concurrent_runs": false
+  },
+  {
+    "label": "Docker: System Prune",
+    "command": "docker system prune --force",
+    "reveal": "always",
+    "allow_concurrent_runs": false
+  },
+  {
+    "label": "Kubernetes: Cluster Info",
+    "command": "kubectl cluster-info",
+    "reveal": "always",
+    "allow_concurrent_runs": true
+  },
+  {
+    "label": "Kubernetes: List All Pods",
+    "command": "kubectl get pods --all-namespaces",
+    "reveal": "always",
+    "allow_concurrent_runs": true
+  },
+  {
+    "label": "Kubernetes: List All Services",
+    "command": "kubectl get services --all-namespaces",
+    "reveal": "always",
+    "allow_concurrent_runs": true
+  },
+  {
+    "label": "Kubernetes: List All Deployments",
+    "command": "kubectl get deployments --all-namespaces",
+    "reveal": "always",
+    "allow_concurrent_runs": true
+  },
+  {
+    "label": "Kubernetes: Show Cluster Node Info",
+    "command": "kubectl get nodes -o wide",
+    "reveal": "always",
+    "allow_concurrent_runs": true
+  },
+  {
+    "label": "Kubernetes: Show Namespace Usage",
+    "command": "kubectl get namespaces",
     "reveal": "always",
     "allow_concurrent_runs": true
   }
