@@ -9,9 +9,9 @@
 
 ## Milestone 2: Postgres is running on Kubernetes (but not connected to the server)
 
-- [ ] Postgres is running on Kubernetes (kubernetes-manifests/postgres.yaml)
-- [ ] Postgres is accessible from outside the cluster
-- [ ] Postgres is accessible from inside the cluster via port forwarding
+- [x] Postgres is running on Kubernetes (kubernetes-manifests/postgres.yaml)
+- [x] Postgres is accessible from outside the cluster
+- [x] Postgres is accessible from inside the cluster via port forwarding
 
 ## Milestone 3: The Server is connected to Postgres
 

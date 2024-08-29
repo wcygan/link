@@ -134,5 +134,35 @@
     "command": "kubectl get namespaces",
     "reveal": "always",
     "allow_concurrent_runs": true
+  },
+  {
+    "label": "PostgreSQL: Port Forward",
+    "command": "kubectl port-forward service/postgres 5432:5432",
+    "reveal": "always",
+    "allow_concurrent_runs": false
+  },
+  {
+    "label": "PostgreSQL: Check Connection",
+    "command": "PGPASSWORD=urlpass psql -h localhost -U urluser -d urlshortener -c '\\l'",
+    "reveal": "always",
+    "allow_concurrent_runs": true
+  },
+  {
+    "label": "PostgreSQL: List Tables",
+    "command": "PGPASSWORD=urlpass psql -h localhost -U urluser -d urlshortener -c '\\dt'",
+    "reveal": "always",
+    "allow_concurrent_runs": true
+  },
+  {
+    "label": "PostgreSQL: Describe Table",
+    "command": "PGPASSWORD=urlpass psql -h localhost -U urluser -d urlshortener -c '\\d+ urls'",
+    "reveal": "always",
+    "allow_concurrent_runs": true
+  },
+  {
+    "label": "PostgreSQL: Execute Query",
+    "command": "PGPASSWORD=urlpass psql -h localhost -U urluser -d urlshortener -c 'SELECT * FROM urls LIMIT 5;'",
+    "reveal": "always",
+    "allow_concurrent_runs": true
   }
 ]
