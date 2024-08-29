@@ -75,8 +75,9 @@ spec:
         readinessProbe:
           exec:
             command: ["pg_isready", "-U", "urluser"]
-          initialDelaySeconds: 5
-          periodSeconds: 10
+          periodSeconds: 1
+          failureThreshold: 3
+          successThreshold: 1
         volumeMounts:
         - name: postgres-storage
           mountPath: /var/lib/postgresql/data
