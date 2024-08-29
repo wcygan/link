@@ -23,7 +23,6 @@
 - [ ] Implement a global load balancer for traffic distribution
 - [ ] Configure database replication for improved read performance and failover
 - [ ] Set up a multi-region Kubernetes cluster
-- [ ] Implement a message queue (e.g., RabbitMQ or Apache Kafka) for handling high-volume URL creation requests
 
 ## Milestone 4: User Authentication and Management
 - [ ] Implement user registration and login functionality (create a new microservice for this, optionally use a new postgres instance)
@@ -44,7 +43,7 @@
 ## Milestone 6: Analytics Pipeline
 - [ ] Implement frontend API for tracking user interactions
 - [ ] Set up Kafka for event streaming
-- [ ] Develop a nearline stream processor for real-time analytics
+- [ ] Develop a nearline stream processor for real-time analytics (use Flink)
 - [ ] Implement data storage in MinIO
 - [ ] Set up Apache Spark for batch processing of analytics data
 
