@@ -106,9 +106,13 @@ func main() {
 	path, handler := linkv1connect.NewUrlShortenerServiceHandler(urlShortener)
 	mux.Handle(path, handler)
 
+	mux.HandleFunc("/healthz", func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+	})
+
 	fmt.Println("Server starting on :8080")
 	err = http.ListenAndServe(
-		"localhost:8080",
+		":8080",
 		// Use h2c so we can serve HTTP/2 without TLS.
 		h2c.NewHandler(mux, &http2.Server{}),
 	)
