@@ -15,7 +15,7 @@ This project implements a URL shortener service using Go, gRPC, and Kubernetes.
 
 1. Clone the repository:
    ```
-   git clone https://github.com/yourusername/url-shortener.git
+   git clone https://github.com/wcygan/url-shortener.git
    cd url-shortener
    ```
 
@@ -46,6 +46,8 @@ Once the application is running, you can use curl commands to test the service:
 
 ### Shorten URL
 
+Command:
+
 ```bash
 curl \
     --header "Content-Type: application/json" \
@@ -53,13 +55,27 @@ curl \
     http://localhost:8080/link.v1.UrlShortenerService/ShortenUrl
 ```
 
+Response:
+
+```bash
+{"shortenedUrl":"http://short.url/6u8egU"}
+```
+
 ### Get Original URL
+
+Command:
 
 ```bash
 curl \
     --header "Content-Type: application/json" \
-    --data '{"shortened_url": "http://short.url/abcde"}' \
+    --data '{"shortened_url": "http://short.url/6u8egU"}' \
     http://localhost:8080/link.v1.UrlShortenerService/GetOriginalUrl
+```
+
+Response:
+
+```bash
+{"originalUrl":"https://www.example.com/very/long/url"}
 ```
 
 Replace the example URLs with actual shortened URLs returned by the service.
