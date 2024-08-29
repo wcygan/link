@@ -1,0 +1,241 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "Minikube: Start",
+            "command": "minikube start",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always"
+            },
+            "group": "minikube"
+        },
+        {
+            "type": "shell",
+            "label": "Minikube: Stop",
+            "command": "minikube stop",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always"
+            },
+            "group": "minikube"
+        },
+        {
+            "type": "shell",
+            "label": "Minikube: Status",
+            "command": "minikube status",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always"
+            },
+            "group": "minikube"
+        },
+        {
+            "type": "shell",
+            "label": "Skaffold Dev",
+            "command": "skaffold dev",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always"
+            },
+            "group": "skaffold"
+        },
+        {
+            "type": "shell",
+            "label": "Skaffold: Delete Resources",
+            "command": "skaffold delete",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always"
+            },
+            "group": "skaffold"
+        },
+        {
+            "type": "shell",
+            "label": "kubectl: Get Pods",
+            "command": "kubectl get pods",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always"
+            },
+            "group": "kubectl"
+        },
+        {
+            "type": "shell",
+            "label": "kubectl: Get Services",
+            "command": "kubectl get services",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always"
+            },
+            "group": "kubectl"
+        },
+        {
+            "type": "shell",
+            "label": "kubectl: Get Deployments",
+            "command": "kubectl get deployments",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always"
+            },
+            "group": "kubectl"
+        },
+        {
+            "type": "shell",
+            "label": "kubectl: Watch Pods",
+            "command": "kubectl get pods -w",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always"
+            },
+            "group": "kubectl"
+        },
+        {
+            "type": "shell",
+            "label": "Start k9s",
+            "command": "k9s",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always"
+            },
+            "group": "kubernetes"
+        },
+        {
+            "type": "shell",
+            "label": "Shorten Default URL",
+            "command": "curl --header \"Content-Type: application/json\" --data '{\"original_url\": \"https://www.example.com/default/long/url\"}' http://localhost:8080/link.v1.UrlShortenerService/ShortenUrl",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always"
+            },
+            "group": "api"
+        },
+        {
+            "type": "shell",
+            "label": "Docker: List Images",
+            "command": "docker images",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always"
+            },
+            "group": "docker"
+        },
+        {
+            "type": "shell",
+            "label": "Docker: List Running Containers",
+            "command": "docker ps",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always"
+            },
+            "group": "docker"
+        },
+        {
+            "type": "shell",
+            "label": "Docker: List All Containers",
+            "command": "docker ps -a",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always"
+            },
+            "group": "docker"
+        },
+        {
+            "type": "shell",
+            "label": "Docker: Prune Unused Images",
+            "command": "docker image prune -a --force",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always"
+            },
+            "group": "docker"
+        },
+        {
+            "type": "shell",
+            "label": "Docker: Prune Unused Containers",
+            "command": "docker container prune --force",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always"
+            },
+            "group": "docker"
+        },
+        {
+            "type": "shell",
+            "label": "Docker: System Prune",
+            "command": "docker system prune --force",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always"
+            },
+            "group": "docker"
+        },
+        {
+            "type": "shell",
+            "label": "Kubernetes: Cluster Info",
+            "command": "kubectl cluster-info",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always"
+            },
+            "group": "kubernetes"
+        },
+        {
+            "type": "shell",
+            "label": "Kubernetes: List All Pods",
+            "command": "kubectl get pods --all-namespaces",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always"
+            },
+            "group": "kubernetes"
+        },
+        {
+            "type": "shell",
+            "label": "Kubernetes: List All Services",
+            "command": "kubectl get services --all-namespaces",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always"
+            },
+            "group": "kubernetes"
+        },
+        {
+            "type": "shell",
+            "label": "Kubernetes: List All Deployments",
+            "command": "kubectl get deployments --all-namespaces",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always"
+            },
+            "group": "kubernetes"
+        },
+        {
+            "type": "shell",
+            "label": "Kubernetes: Show Cluster Node Info",
+            "command": "kubectl get nodes -o wide",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always"
+            },
+            "group": "kubernetes"
+        },
+        {
+            "type": "shell",
+            "label": "Kubernetes: Show Namespace Usage",
+            "command": "kubectl get namespaces",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always"
+            },
+            "group": "kubernetes"
+        }
+    ]
+}
