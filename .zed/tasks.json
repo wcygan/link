@@ -52,6 +52,11 @@
     "reveal": "always"
   },
   {
+    "label": "kubectl: Delete All",
+    "command": "kubectl delete all --all",
+    "reveal": "always"
+  },  
+  {
     "label": "Start k9s",
     "command": "k9s",
     "reveal": "always",

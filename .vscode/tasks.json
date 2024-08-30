@@ -89,6 +89,16 @@
         },
         {
             "type": "shell",
+            "label": "kubectl: Delete All",
+            "command": "kubectl delete all --all",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always"
+            },
+            "group": "kubectl"
+        },
+        {
+            "type": "shell",
             "label": "kubectl: Get Services",
             "command": "kubectl get services",
             "problemMatcher": [],
