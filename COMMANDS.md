@@ -53,3 +53,44 @@ Response:
 ```bash
 {"originalUrl":"https://www.example.com/very/long/url"}
 ```
+
+### Register
+
+Command:
+
+```bash
+curl -X POST \
+  http://localhost:8081/auth.v1.AuthService/Register \
+  -H "Content-Type: application/json" \
+  -H "Connect-Protocol-Version: 1" \
+  -d '{
+    "username": "testuser",
+    "email": "testuser@example.com",
+    "password": "securepassword123"
+  }'
+```
+
+Response:
+
+```bash
+{"userId":"1"}
+```
+
+### Login
+
+Command:
+
+```bash
+curl -X POST \
+  http://localhost:8081/auth.v1.AuthService/Login \
+  -H "Content-Type: application/json" \
+  -H "Connect-Protocol-Version: 1" \
+  -d '{
+    "username": "testuser",
+    "password": "securepassword123"
+  }'
+```
+
+```
+{"token":"dummy_token"}
+```
