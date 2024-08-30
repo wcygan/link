@@ -23,12 +23,12 @@ COPY authentication-service/migrations ./migrations
 COPY authentication-service .
 
 # Build the application
-RUN CGO_ENABLED=0 GOOS=linux go build -o auth-server ./cmd/main.go
+RUN CGO_ENABLED=0 GOOS=linux go build -o auth-service ./cmd/main.go
 
 FROM alpine:3.14
 RUN apk add --no-cache ca-certificates tzdata
 WORKDIR /app
-COPY --from=builder /app/authentication-service/auth-server .
+COPY --from=builder /app/authentication-service/auth-service .
 COPY --from=builder /app/authentication-service/migrations ./migrations
 COPY --from=builder /go/bin/migrate .
-CMD ["./auth-server"]
+CMD ["./auth-service"]

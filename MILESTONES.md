@@ -9,16 +9,16 @@
 - [x] Postgres is accessible from outside the cluster
 - [x] Postgres is accessible from inside the cluster via port forwarding
 - [x] The server connects to Postgres
-- [x] The server has an algorithm for shortening URLs which
+- [x] The server has an algorithm for shortening URLs
 - [x] The server can create a new short URL (curl /link.v1.UrlShortenerService/ShortenUrl) (server/cmd/main.go)
 - [x] The server can retrieve a long URL from a short URL (curl /link.v1.UrlShortenerService/GetOriginalUrl) (server/cmd/main.go)
 - [x] Running curl against the server returns the expected results (COMMANDS.md)
 
 ## Milestone 2: Performance Optimization
-- [ ] Make the Postgres databases spin up quicker (it seems auth-db spins up quicker than link-db for skaffold dev... Maybe duplicate their exact setup instructions)
+- [x] Make the Postgres databases spin up quicker (it seems auth-db spins up quicker than link-db for skaffold dev... Maybe duplicate their exact setup instructions)
 - [ ] Implement Redis caching layer for frequently accessed URLs
 - [ ] Optimize database queries and add appropriate indexes
-- [ ] Set up horizontal pod autoscaling for the linkservice deployment
+- [x] Set up horizontal pod autoscaling for the service deployments
 
 ## Milestone 3: High Availability and Scalability
 - [ ] Use https://cloudnative-pg.io/documentation/1.24/quickstart/ to set up a high availability Postgres cluster (use 1 replica for dev and 3 for prod)

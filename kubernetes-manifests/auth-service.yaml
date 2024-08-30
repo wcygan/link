@@ -78,22 +78,23 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: auth-server
+  name: auth-service
 spec:
+  replicas: 2
   selector:
     matchLabels:
-      app: auth-server
+      app: auth-service
   template:
     metadata:
       labels:
-        app: auth-server
+        app: auth-service
     spec:
       initContainers:
       - name: wait-for-auth-db
         image: busybox
         command: ['sh', '-c', 'until nc -z auth-db 5432; do echo waiting for auth-db; usleep 250000; done;']
       - name: run-migrations
-        image: auth-server
+        image: auth-service
         command: ['./migrate', '-path', '/app/migrations', '-database', '$(DATABASE_URL)', 'up']
         env:
         - name: DATABASE_URL
@@ -102,8 +103,8 @@ spec:
               name: auth-db-secrets
               key: url
       containers:
-      - name: auth-server
-        image: auth-server
+      - name: auth-service
+        image: auth-service
         ports:
         - containerPort: 8080
         env:
@@ -145,11 +146,36 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: auth-server
+  name: auth-service
 spec:
   type: ClusterIP
   selector:
-    app: auth-server
+    app: auth-service
   ports:
   - port: 8080
     targetPort: 8080
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: auth-service-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: auth-service
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 50
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80

@@ -8,7 +8,7 @@ build:
       context: .
       docker:
         dockerfile: link-service/Dockerfile
-    - image: auth-server
+    - image: auth-service
       context: .
       docker:
         dockerfile: authentication-service/Dockerfile
@@ -27,6 +27,6 @@ portForward:
     port: 8080
     localPort: 8080
   - resourceType: service
-    resourceName: auth-server
+    resourceName: auth-service
     port: 8080
     localPort: 8081
