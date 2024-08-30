@@ -12,6 +12,10 @@ build:
       context: .
       docker:
         dockerfile: authentication-service/Dockerfile
+    - image: api-gateway
+      context: .
+      docker:
+        dockerfile: api-gateway/Dockerfile
   tagPolicy:
     gitCommit: {}
   local:
@@ -23,10 +27,14 @@ deploy:
   kubectl: {}
 portForward:
   - resourceType: service
-    resourceName: link-service
+    resourceName: api-gateway
     port: 8080
     localPort: 8080
   - resourceType: service
-    resourceName: auth-service
+    resourceName: link-service
     port: 8080
     localPort: 8081
+  - resourceType: service
+    resourceName: auth-service
+    port: 8080
+    localPort: 8082

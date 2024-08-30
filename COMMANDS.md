@@ -60,7 +60,7 @@ Command:
 
 ```bash
 curl -X POST \
-  http://localhost:8081/auth.v1.AuthService/Register \
+  http://localhost:8080/auth.v1.AuthService/Register \
   -H "Content-Type: application/json" \
   -H "Connect-Protocol-Version: 1" \
   -d '{
@@ -82,7 +82,7 @@ Command:
 
 ```bash
 curl -X POST \
-  http://localhost:8081/auth.v1.AuthService/Login \
+  http://localhost:8080/auth.v1.AuthService/Login \
   -H "Content-Type: application/json" \
   -H "Connect-Protocol-Version: 1" \
   -d '{
