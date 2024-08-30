@@ -21,6 +21,7 @@
 - [ ] Set up horizontal pod autoscaling for the linkservice deployment
 
 ## Milestone 3: High Availability and Scalability
+- [ ] Use https://cloudnative-pg.io/documentation/1.24/quickstart/ to set up a high availability Postgres cluster (use 1 replica for dev and 3 for prod)
 - [ ] Implement a global load balancer for traffic distribution
 - [ ] Configure database replication for improved read performance and failover
 - [ ] Set up a multi-region Kubernetes cluster
