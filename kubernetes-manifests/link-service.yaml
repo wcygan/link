@@ -38,7 +38,7 @@ spec:
         - containerPort: 5432
         env:
         - name: POSTGRES_DB
-          value: link-db
+          value: link-db 
         - name: POSTGRES_USER
           value: urluser
         - name: POSTGRES_PASSWORD
@@ -48,9 +48,9 @@ spec:
           mountPath: /var/lib/postgresql/data
         readinessProbe:
           exec:
-            command: ["pg_isready", "-U", "urluser"]
-          periodSeconds: 5
-          failureThreshold: 3
+            command: ["pg_isready", "-U", "urluser", "-d", "link-db"]
+          periodSeconds: 1
+          failureThreshold: 10
         resources:
           requests:
             cpu: 100m
@@ -124,7 +124,7 @@ spec:
             path: /healthz
             port: 8080
           periodSeconds: 1
-          failureThreshold: 3
+          failureThreshold: 5
           successThreshold: 1
           timeoutSeconds: 1
         livenessProbe:

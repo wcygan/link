@@ -48,9 +48,9 @@ spec:
           mountPath: /var/lib/postgresql/data
         readinessProbe:
           exec:
-            command: ["pg_isready", "-U", "authuser"]
-          periodSeconds: 5
-          failureThreshold: 3
+            command: ["pg_isready", "-U", "authuser", "-d", "auth-db"]
+          periodSeconds: 1
+          failureThreshold: 10
         resources:
           requests:
             cpu: 100m
