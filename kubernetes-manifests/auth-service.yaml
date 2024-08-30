@@ -91,7 +91,7 @@ spec:
       initContainers:
       - name: wait-for-auth-db
         image: busybox
-        command: ['sh', '-c', 'until nc -z auth-db 5432; do echo waiting for auth-db; sleep 2; done;']
+        command: ['sh', '-c', 'until nc -z auth-db 5432; do echo waiting for auth-db; usleep 250000; done;']
       - name: run-migrations
         image: auth-server
         command: ['./migrate', '-path', '/app/migrations', '-database', '$(DATABASE_URL)', 'up']

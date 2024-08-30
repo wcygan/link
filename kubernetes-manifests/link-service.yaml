@@ -91,7 +91,7 @@ spec:
       initContainers:
       - name: wait-for-link-db
         image: busybox
-        command: ['sh', '-c', 'until nc -z link-db 5432; do echo waiting for link-db; sleep 2; done;']
+        command: ['sh', '-c', 'until nc -z link-db 5432; do echo waiting for link-db; usleep 250000; done;']
       - name: run-migrations
         image: link-server
         command: ['/app/migrate', '-path', '/app/migrations', '-database', '$(DATABASE_URL)', 'up']

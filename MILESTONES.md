@@ -15,6 +15,7 @@
 - [x] Running curl against the server returns the expected results (COMMANDS.md)
 
 ## Milestone 2: Performance Optimization
+- [ ] Make the Postgres databases spin up quicker (it seems auth-db spins up quicker than link-db for skaffold dev... Maybe duplicate their exact setup instructions)
 - [ ] Implement Redis caching layer for frequently accessed URLs
 - [ ] Optimize database queries and add appropriate indexes
 - [ ] Set up horizontal pod autoscaling for the linkservice deployment

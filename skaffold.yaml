@@ -27,10 +27,6 @@ portForward:
     port: 8080
     localPort: 8080
   - resourceType: service
-    resourceName: postgres
-    port: 5432
-    localPort: 5432
-  - resourceType: service
     resourceName: auth-server
     port: 8080
     localPort: 8081
