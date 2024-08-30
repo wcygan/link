@@ -8,6 +8,10 @@ build:
       context: .
       docker:
         dockerfile: link-server/Dockerfile
+    - image: auth-server
+      context: .
+      docker:
+        dockerfile: authentication-service/Dockerfile
   tagPolicy:
     gitCommit: {}
   local:
@@ -26,3 +30,7 @@ portForward:
     resourceName: postgres
     port: 5432
     localPort: 5432
+  - resourceType: service
+    resourceName: auth-server
+    port: 8080
+    localPort: 8081
