@@ -1,8 +1,8 @@
 # Milestones
 
 ## Milestone 1: Get the basic application running on Kubernetes
-- [x] The server has a Dockerfile (link-server/Dockerfile)
-- [x] The server runs on Kubernetes (kubernetes-manifests/link-server.yaml)
+- [x] The server has a Dockerfile (link-service/Dockerfile)
+- [x] The server runs on Kubernetes (kubernetes-manifests/link-service.yaml)
 - [x] The server is accessible from outside the cluster
 - [x] The server is accessible from inside the cluster via port forwarding
 - [x] Postgres is running on Kubernetes (kubernetes-manifests/postgres.yaml)

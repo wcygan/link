@@ -78,22 +78,22 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: link-server
+  name: link-service
 spec:
   selector:
     matchLabels:
-      app: link-server
+      app: link-service
   template:
     metadata:
       labels:
-        app: link-server
+        app: link-service
     spec:
       initContainers:
       - name: wait-for-link-db
         image: busybox
         command: ['sh', '-c', 'until nc -z link-db 5432; do echo waiting for link-db; usleep 250000; done;']
       - name: run-migrations
-        image: link-server
+        image: link-service
         command: ['/app/migrate', '-path', '/app/migrations', '-database', '$(DATABASE_URL)', 'up']
         env:
         - name: DATABASE_URL
@@ -102,8 +102,8 @@ spec:
               name: link-db-secrets
               key: url
       containers:
-      - name: link-server
-        image: link-server
+      - name: link-service
+        image: link-service
         ports:
         - containerPort: 8080
         env:
@@ -141,11 +141,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: link-server
+  name: link-service
 spec:
   type: ClusterIP
   selector:
-    app: link-server
+    app: link-service
   ports:
   - port: 8080
     targetPort: 8080

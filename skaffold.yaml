@@ -4,10 +4,10 @@ metadata:
   name: app
 build:
   artifacts:
-    - image: link-server
+    - image: link-service
       context: .
       docker:
-        dockerfile: link-server/Dockerfile
+        dockerfile: link-service/Dockerfile
     - image: auth-server
       context: .
       docker:
@@ -23,7 +23,7 @@ deploy:
   kubectl: {}
 portForward:
   - resourceType: service
-    resourceName: link-server
+    resourceName: link-service
     port: 8080
     localPort: 8080
   - resourceType: service

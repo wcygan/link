@@ -11,34 +11,34 @@ RUN apk add --no-cache git
 WORKDIR /app
 
 # Copy go.mod and go.sum files
-COPY link-server/go.mod link-server/go.sum ./link-server/
+COPY link-service/go.mod link-service/go.sum ./link-service/
 COPY generated/go/go.mod generated/go/go.sum ./generated/go/
 
 # Copy the generated protobuf code
 COPY --from=bufbuild /app/generated ./generated
 
-# Set WORKDIR to link-server directory
-WORKDIR /app/link-server
+# Set WORKDIR to link-service directory
+WORKDIR /app/link-service
 
 # Download dependencies
 RUN go mod download
 
 # Add golang-migrate tool and migrations
 RUN go install -tags 'postgres' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
-COPY link-server/migrations ./migrations
+COPY link-service/migrations ./migrations
 
-# Copy the link-server source code
-COPY link-server .
+# Copy the link-service source code
+COPY link-service .
 
 # Build the application
 RUN --mount=type=cache,target=/root/.cache/go-build \
-    CGO_ENABLED=0 GOOS=linux go build -o link-server ./cmd/main.go
+    CGO_ENABLED=0 GOOS=linux go build -o link-service ./cmd/main.go
 
 ### Final stage ###
 FROM alpine:3.14
 RUN apk add --no-cache ca-certificates tzdata
 WORKDIR /app
-COPY --from=builder /app/link-server/link-server .
-COPY --from=builder /app/link-server/migrations ./migrations
+COPY --from=builder /app/link-service/link-service .
+COPY --from=builder /app/link-service/migrations ./migrations
 COPY --from=builder /go/bin/migrate .
-CMD ["./link-server"]
+CMD ["./link-service"]
