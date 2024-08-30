@@ -94,3 +94,11 @@ curl -X POST \
 ```
 {"token":"dummy_token"}
 ```
+
+### Kubernetes
+
+Delete everything:
+
+```bash
+kubectl delete all --all
+```
