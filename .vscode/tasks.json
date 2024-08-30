@@ -2,6 +2,26 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "Register User",
+            "type": "shell",
+            "command": "curl -X POST http://localhost:8081/auth.v1.AuthService/Register -H \"Content-Type: application/json\" -H \"Connect-Protocol-Version: 1\" -d '{\"username\": \"testuser\", \"email\": \"testuser@example.com\", \"password\": \"securepassword123\"}'",
+            "group": "test",
+            "presentation": {
+              "reveal": "always",
+              "panel": "new"
+            }
+        },
+        {
+            "label": "Login User",
+            "type": "shell",
+            "command": "curl -X POST http://localhost:8081/auth.v1.AuthService/Login -H \"Content-Type: application/json\" -H \"Connect-Protocol-Version: 1\" -d '{\"username\": \"testuser\", \"password\": \"securepassword123\"}'",
+            "group": "test",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        },
+        {
             "type": "shell",
             "label": "Minikube: Start",
             "command": "minikube start",

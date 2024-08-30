@@ -164,5 +164,17 @@
     "command": "PGPASSWORD=urlpass psql -h localhost -U urluser -d urlshortener -c 'SELECT * FROM urls LIMIT 5;'",
     "reveal": "always",
     "allow_concurrent_runs": true
+  },
+  {
+    "label": "Register User",
+    "command": "curl -X POST http://localhost:8081/auth.v1.AuthService/Register -H \"Content-Type: application/json\" -H \"Connect-Protocol-Version: 1\" -d '{\"username\": \"testuser\", \"email\": \"testuser@example.com\", \"password\": \"securepassword123\"}'",
+    "reveal": "always",
+    "allow_concurrent_runs": true
+  },
+  {
+    "label": "Login User",
+    "command": "curl -X POST http://localhost:8081/auth.v1.AuthService/Login -H \"Content-Type: application/json\" -H \"Connect-Protocol-Version: 1\" -d '{\"username\": \"testuser\", \"password\": \"securepassword123\"}'",
+    "reveal": "always",
+    "allow_concurrent_runs": true
   }
 ]
