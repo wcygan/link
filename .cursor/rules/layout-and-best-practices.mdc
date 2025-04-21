@@ -1,3 +1,8 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
 # Layout and Best Practices
 
 ## Layout
@@ -15,13 +20,13 @@ Standard Go project layout conventions are encouraged. Key directories include:
 - `server/pkg/` - Library code okay to use by external applications (use sparingly).
 - `server/db/migrations/` - Database migration files.
 - `bin/` - Compiled binaries or scripts.
-- `docker-compose.yaml` - Docker setup for dependencies.
-- `Makefile` - Common development tasks.
+- [`docker-compose.yaml`](mdc:docker-compose.yaml) - Docker setup for dependencies.
+- [`Makefile`](mdc:Makefile) - Common development tasks.
 
 ## Best Practices
 
 1.  **Protobuf & API Design:**
-    *   Follow the [Buf Style Guide](https://buf.build/docs/style-guide) and general Protobuf best practices.
+    *   Follow the Buf Style Guide and general Protobuf best practices.
     *   Use Connect RPC (`connectrpc.com/connect`).
     *   Generate code using `buf generate`.
 2.  **Code Formatting & Linting:**
@@ -45,7 +50,7 @@ Standard Go project layout conventions are encouraged. Key directories include:
     *   Write unit tests using the standard `testing` package.
     *   Use `testify/assert` and `testify/require` for assertions.
     *   For integration tests involving external services (like databases), use `testcontainers-go`.
-    *   Use Ginkgo/Gomega for BDD-style testing if preferred (as established in TECH-STACK.md).
+    *   Use Ginkgo/Gomega for BDD-style testing if preferred (as established in [`TECH-STACK.md`](mdc:TECH-STACK.md)).
     *   Run tests with `make test`.
 9.  **Concurrency:**
     *   Use goroutines and channels appropriately.

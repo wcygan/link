@@ -26,7 +26,7 @@ GOFMT=gofmt -w
 # Docker parameters
 DOCKER_COMPOSE=docker-compose
 
-.PHONY: all build clean run lint fmt proto tools docker-up docker-down help
+.PHONY: all build clean run test lint fmt proto tools docker-up docker-down help
 
 all: help
 
@@ -65,6 +65,11 @@ lint:
 	@echo "Linting $(SERVICE_NAME)..."
 	cd $(SERVICE_DIR) && $(GOLINT) ./...
 
+# Test the code
+test:
+	@echo "Testing $(SERVICE_NAME)..."
+	cd $(SERVICE_DIR) && $(GOTEST) ./...
+
 # Format the code
 fmt:
 	@echo "Formatting $(SERVICE_NAME)..."
@@ -94,11 +99,10 @@ help:
 	@echo "  run          Build and run the $(SERVICE_NAME) application"
 	@echo "  tools        Install required Go tools (buf, protoc-gen-go, protoc-gen-connect-go)"
 	@echo "  proto        Lint protobuf files and generate Go code"
+	@echo "  test         Run tests for $(SERVICE_NAME)"
 	@echo "  lint         Lint the Go code for $(SERVICE_NAME)"
 	@echo "  fmt          Format the Go code for $(SERVICE_NAME)"
 	@echo "  docker-up    Start required Docker services in the background"
 	@echo "  docker-down  Stop required Docker services"
 	@echo "  help         Show this help message"
 	@echo ""
-
-# --- Removed multi-service logic and related targets --- 
