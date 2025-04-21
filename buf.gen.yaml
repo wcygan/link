@@ -1,0 +1,11 @@
+version: v2
+plugins:
+  # This plugin generates Go type definitions from your Protobuf schema.
+  - local: protoc-gen-go 
+    out: gen
+    opt: paths=source_relative
+
+  # This plugin generates Connect-specific Go code, including clients and handlers.
+  - local: protoc-gen-connect-go
+    out: gen
+    opt: paths=source_relative 
