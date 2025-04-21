@@ -1,0 +1,4 @@
+buf.build/gen/go/wcygan/link/connectrpc/go v1.18.1-20250421142804-7a7fa6e6e9bb.1 h1:Sx1mrV7X8ChMvYzs/Rd6MiTR5gKab9ypqC0heoD6ox0=
+buf.build/gen/go/wcygan/link/connectrpc/go v1.18.1-20250421142804-7a7fa6e6e9bb.1/go.mod h1:HEdXmdtyfOS4PH2tjsHv8dKFM11JHAj04N9b8+Hia74=
+buf.build/gen/go/wcygan/link/protocolbuffers/go v1.36.6-20250421142804-7a7fa6e6e9bb.1 h1:LHKy7kmNbYcoB/Nq0Ip3P7fBc7xPTA4NyJnH4OKcI48=
+buf.build/gen/go/wcygan/link/protocolbuffers/go v1.36.6-20250421142804-7a7fa6e6e9bb.1/go.mod h1:LYvJea/AoejEw66xVeHeQHwlEba1ioGUmt8iiQsWuEk=
