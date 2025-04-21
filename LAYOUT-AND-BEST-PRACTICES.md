@@ -2,7 +2,14 @@
 
 ## Layout
 
-TBD
+- proto/
+- server/cmd/
+- server/db/
+- server/db/migrations/
+- server/internal/
+- server/pkg/
+- docker-compose.yml
+- Makefile
 
 ## Best Practices
 
