@@ -1,0 +1,84 @@
+version: '3.8'
+services:
+  pd0:
+    image: pingcap/pd:latest
+    command:
+      - --name=pd0
+      - --client-urls=http://0.0.0.0:2379
+      - --peer-urls=http://0.0.0.0:2380
+      - --advertise-client-urls=http://pd0:2379
+      - --advertise-peer-urls=http://pd0:2380
+      - --initial-cluster=pd0=http://pd0:2380,pd1=http://pd1:2380,pd2=http://pd2:2380
+    ports:
+      - "2379:2379"
+      - "2380:2380"
+
+  pd1:
+    image: pingcap/pd:latest
+    command:
+      - --name=pd1
+      - --client-urls=http://0.0.0.0:2379
+      - --peer-urls=http://0.0.0.0:2380
+      - --advertise-client-urls=http://pd1:2379
+      - --advertise-peer-urls=http://pd1:2380
+      - --initial-cluster=pd0=http://pd0:2380,pd1=http://pd1:2380,pd2=http://pd2:2380
+    depends_on: [pd0]
+
+  pd2:
+    image: pingcap/pd:latest
+    command:
+      - --name=pd2
+      - --client-urls=http://0.0.0.0:2379
+      - --peer-urls=http://0.0.0.0:2380
+      - --advertise-client-urls=http://pd2:2379
+      - --advertise-peer-urls=http://pd2:2380
+      - --initial-cluster=pd0=http://pd0:2380,pd1=http://pd1:2380,pd2=http://pd2:2380
+    depends_on: [pd0]
+
+  tikv0:
+    image: pingcap/tikv:latest
+    command:
+      - --addr=0.0.0.0:20160
+      - --pd=pd0:2379
+    ports:
+      - "20160:20160"
+    depends_on: [pd0]
+
+  tikv1:
+    image: pingcap/tikv:latest
+    command:
+      - --addr=0.0.0.0:20160
+      - --pd=pd0:2379
+    depends_on: [pd0]
+
+  tikv2:
+    image: pingcap/tikv:latest
+    command:
+      - --addr=0.0.0.0:20160
+      - --pd=pd0:2379
+    depends_on: [pd0]
+
+  tidb0:
+    image: pingcap/tidb:latest
+    command:
+      - --store=tikv
+      - --path=pd0:2379
+    ports:
+      - "4000:4000"
+    depends_on: [tikv0]
+
+  tidb1:
+    image: pingcap/tidb:latest
+    command:
+      - --store=tikv
+      - --path=pd0:2379
+    depends_on: [tikv0]
+
+  tiflash:
+    image: pingcap/tiflash:latest
+    depends_on: [tikv0]
+    # additional TiFlash configs...
+
+volumes:
+  pd-data:
+  tikv-data:
