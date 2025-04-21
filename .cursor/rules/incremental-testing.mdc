@@ -1,0 +1,35 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Incremental Development and Testing Workflow
+
+## Core Principle: Add, Test, Add, Test
+
+This project emphasizes an iterative and test-driven development approach. Follow this pattern rigorously:
+
+1.  **Add:** Implement a small, focused piece of functionality or fix.
+2.  **Test:** Write unit and/or integration tests covering the new code *immediately*. Ensure thoroughness, considering edge cases.
+3.  **Verify:** Run the tests. Ensure they pass and cover the intended logic.
+4.  **Repeat:** Continue with the next small increment.
+
+## Testing Requirements
+
+*   **Coverage:** Aim for high test coverage. Nearly all new code contributions require corresponding tests.
+*   **Integration:** Tests should integrate smoothly with the existing test suite. Ensure your new tests are picked up and pass when running `make test` as defined in the [Makefile](mdc:Makefile).
+*   **Tools:** Leverage the primary testing stack:
+    *   **Ginkgo:** BDD testing framework.
+    *   **Gomega:** Matcher library for assertions.
+    *   **testcontainers-go:** For managing Docker dependencies (like databases or caches) during integration tests.
+    *   See [TECH-STACK.md](mdc:TECH-STACK.md) for more details.
+
+## Inspired by Best Practices
+
+Drawing inspiration from agentic workflow principles, treat development like building a robust agent:
+
+*   **Understand Deeply:** Clearly define the requirement for the small code addition.
+*   **Plan Incrementally:** Break down larger features into small, testable steps.
+*   **Implement Incrementally:** Make small, verifiable code changes.
+*   **Test Rigorously:** After *each* change, run tests. Test frequently and thoroughly, watching for boundary conditions and edge cases. Do not commit untested code.
+*   **Iterate:** If tests fail or reveal issues, debug and fix *before* adding more code.
