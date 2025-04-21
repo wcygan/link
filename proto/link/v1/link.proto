@@ -1,0 +1,54 @@
+syntax = "proto3";
+package urlsvc.v1;
+
+import "google/protobuf/empty.proto";
+
+option go_package = "github.com/yourorg/urlsvc/gen/urlsvc/v1;urlsvc";
+
+service UrlService {
+    // Inserts (or returns existing) URL→code, kicks off preview.
+    rpc ShortenURL     (ShortenURLRequest) returns (ShortenURLResponse);
+  
+    // Force‑starts the PreviewWorkflow for an existing link.
+    rpc RefreshPreview (UrlSelector)       returns (google.protobuf.Empty);
+  
+    // Reads the last persisted preview from TiDB.
+    rpc GetPreview     (UrlSelector)       returns (UrlPreview);
+  
+    // Produces a QR code on‑the‑fly; no DB or Workflow.
+    rpc GenerateQRCode (GenerateQrReq)     returns (QrCode);
+  }  
+
+// Selector for any RPC that can take either the short code or the original URL.
+message UrlSelector {
+  oneof by {
+    string short_code    = 1;
+    string original_url  = 2;
+  }
+}
+
+message ShortenURLRequest {
+  string original_url = 1;
+  // Optional: custom code to use instead of auto‑generated
+  string custom_code  = 2;
+  // TTL in seconds; null or zero = no expiration
+  int64  ttl_seconds  = 3;
+}
+message ShortenURLResponse {
+  // e.g. https://short.ly/Ab3k9
+  string short_url    = 1;
+}
+
+message UrlPreview {
+  string title        = 1;
+  string description  = 2;
+  // Unix epoch seconds when fetched
+  int64  fetched_at   = 3;
+}
+
+message GenerateQrReq {
+  string short_code   = 1;
+}
+message QrCode {
+  bytes png_data      = 1;
+}

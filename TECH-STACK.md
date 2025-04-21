@@ -6,11 +6,11 @@
 4. Cache: Dragonfly (redis compatible)
 5. Workflow Engine: Temporal
 6. HTML Parsing: Goquery
-7. API Governance: Buf
-8. Dependency Injection: UberFx
-9. Configuration: Viper
-10. Logging: Zap
-11. Observability: nothing besides logging; this is simply a learning project
-12. Image Builder: ko
-13. MySQL Driver: go-sql-driver/mysql
-14. ORM: GORM
+7. Dependency Injection: UberFx
+8. Configuration: Viper
+9. Logging: Zap
+10. Observability: nothing besides logging; this is simply a learning project
+11. Image Builder: ko
+12. ORM: GORM
+13. Migration: Gorm Migrations
+14. Testing: Ginkgo, Gomega, testcontainers-go
