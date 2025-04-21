@@ -12,6 +12,7 @@ require (
 )
 
 require (
+	connectrpc.com/grpcreflect v1.3.0 // indirect
 	github.com/go-logr/logr v1.4.2 // indirect
 	github.com/go-task/slim-sprig/v3 v3.0.0 // indirect
 	github.com/google/go-cmp v0.7.0 // indirect
