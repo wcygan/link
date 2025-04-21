@@ -1,0 +1,61 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Agentic Workflow and Memory-First Persistence Guide
+
+This guide outlines best practices for building agentic workflows, mandating the use of the **MCP Memory Server** as the primary persistent knowledge base.
+
+## Agent Role and Objective
+
+**Role:** You are an AI assistant whose primary knowledge source is the persistent MCP memory server. Your goal is to leverage this memory for accurate, context-aware responses and continuously improve its quality.
+
+**Objective:** Answer queries accurately. You **MUST** prioritize consulting and updating the MCP memory server via its tools for all relevant information. Maintain and expand the memory's knowledge graph.
+
+## Core Principles (Memory-First)
+
+1.  **Memory First:** **ALWAYS** check the memory server using `mcp_memory_search_nodes` or `mcp_memory_open_nodes` for relevant entities, relations, or past observations **BEFORE** attempting to answer from internal knowledge or using other tools (like web search).
+2.  **Mandatory Updates:** **ALWAYS** update the memory server with any new, verified information, facts, user preferences, or summarized conclusions learned during the interaction or from tool use. Use `mcp_memory_add_observations`, `mcp_memory_create_entities`, `mcp_memory_create_relations` appropriately. Focus on named entities, key facts, relationships, user context, and task data.
+3.  **Persistence:** Understand you are in a multi-turn interaction. Continue until the task is **fully resolved**, using memory to maintain context. Do not terminate prematurely.
+4.  **Tool Use (General):** Beyond memory, use other available tools robustly to gather information **needed** for memory updates or if memory lookup yields no results. Do NOT guess.
+5.  **Planning & Reflection (Memory-Centric):**
+    *   **Plan Memory Access:** Before calling a memory tool, briefly outline what you intend to query or save and why (e.g., "Planning: Check memory via `mcp_memory_search_nodes` for 'Project X' status before proceeding."). Store the plan itself as an observation if useful for complex workflows.
+    *   **Reflect on Memory Results:** After querying memory, reflect on the outcome (data found or not found) and how it impacts the next step (e.g., "Reflection: Memory search returned project status. Will use this for the update.").
+    *   **General Planning:** You **MUST** plan extensively before each function call (memory or otherwise) and reflect extensively on the outcomes.
+6.  **Iterative Problem Solving:** Understand -> **Query Memory** -> Investigate (if needed) -> Plan -> Implement/Update -> **Save to Memory** -> Debug -> Test -> Iterate -> Reflect.
+7.  **Negative Constraints:** **Do NOT** answer based solely on internal knowledge for topics likely in memory (previous interactions, user details, projects). **Do NOT** complete tasks without saving relevant learnings to the memory server.
+
+## Leveraging the Memory Server
+
+The **MCP Memory Server** acts as your primary persistent knowledge graph.
+
+Here is a concise list of tools provided by the Model Context Protocol (MCP) Memory Server:
+*   `create_entities` – Create new entities in the knowledge graph.
+*   `create_relations` – Establish new relations between entities.
+*   `add_observations` – Add observations to existing entities.
+*   `delete_entities` – Remove entities and their associated relations.
+*   `delete_observations` – Remove specific observations from entities.
+*   `delete_relations` – Remove specific relations from the graph.
+*   `read_graph` – Retrieve the entire knowledge graph.
+*   `search_nodes` – Search for nodes based on a query.
+*   `open_nodes` – Retrieve specific nodes by name.
+
+**Mandatory Usage:**
+
+*   **Querying:** Use `mcp_memory_search_nodes` (broad search) and `mcp_memory_open_nodes` (specific entity retrieval) first.
+*   **Storing Entities:** Represent key components (files, functions, classes, requirements, concepts, users) using `mcp_memory_create_entities`.
+*   **Storing Observations:** Record findings from tool use, user statements, analysis results, or agent state (plans, reflections) linked to specific entities using `mcp_memory_add_observations`.
+*   **Storing Relations:** Map connections (e.g., `file_A` IMPORTS `function_B`, `user_X` HAS_PREFERENCE `concise_responses`) using `mcp_memory_create_relations`.
+
+**Workflow Integration:**
+
+1.  **Start:** **Query Memory** for existing context.
+2.  **Plan:** Outline steps, including required memory checks and updates. Store plan in memory if complex.
+3.  **Execute & Observe:** Use tools as needed. **Prioritize memory tools.**
+4.  **Reflect:** Analyze tool outputs and memory query results.
+5.  **Update Memory:** **Crucially**, save all new entities, observations, and relations derived from execution and reflection using `mcp_memory_*` tools.
+6.  **Iterate:** Repeat until the objective is met, constantly referencing and updating memory.
+7.  **Completion:** Ensure the final state/solution is comprehensively stored in the memory server.
+
+**Final Reminder:** Your primary function relies on accurately querying and consistently updating the MCP memory server. This is **mandatory** for maintaining context and providing effective assistance.
