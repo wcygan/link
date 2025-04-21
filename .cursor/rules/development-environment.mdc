@@ -1,0 +1,49 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Development Environment and Deployment
+
+## Overview
+
+This project utilizes a hybrid development approach:
+
+*   **Dependencies:** Core dependencies like databases (e.g., TiDB, Dragonfly) are run using **Docker**. See [docker-compose.yaml](mdc:docker-compose.yaml)
+*   **Application:** The main application code is typically developed and run natively using **Go** on macOS (specifically tested on M1 architecture).
+*   **Artifacts:** Finalized container images for deployment are built using **Ko Build**.
+
+## Inspecting Docker State (via MCP)
+
+The state of Dockerized components can be inspected using the following Docker MCP commands:
+
+**Containers**
+
+*   `mcp_mcp-server-docker_list_containers`
+*   `mcp_mcp-server-docker_create_container`
+*   `mcp_mcp-server-docker_run_container`
+*   `mcp_mcp-server-docker_recreate_container`
+*   `mcp_mcp-server-docker_start_container`
+*   `mcp_mcp-server-docker_fetch_container_logs`
+*   `mcp_mcp-server-docker_stop_container`
+*   `mcp_mcp-server-docker_remove_container`
+
+**Images**
+
+*   `mcp_mcp-server-docker_list_images`
+*   `mcp_mcp-server-docker_pull_image`
+*   `mcp_mcp-server-docker_push_image`
+*   `mcp_mcp-server-docker_build_image`
+*   `mcp_mcp-server-docker_remove_image`
+
+**Networks**
+
+*   `mcp_mcp-server-docker_list_networks`
+*   `mcp_mcp-server-docker_create_network`
+*   `mcp_mcp-server-docker_remove_network`
+
+**Volumes**
+
+*   `mcp_mcp-server-docker_list_volumes`
+*   `mcp_mcp-server-docker_create_volume`
+*   `mcp_mcp-server-docker_remove_volume`
