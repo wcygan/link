@@ -27,15 +27,15 @@ This document outlines the development plan for the Link Service project. The go
 
 **Goal:** Prepare the Go application structure for implementing features.
 
-*   [ ] **Install Dependencies:** Add missing Go modules specified in `TECH-STACK.md`.
-    *   [ ] GORM (`gorm.io/gorm` and TiDB driver `gorm.io/driver/mysql`)
-    *   [ ] Temporal SDK (`go.temporal.io/sdk`)
-    *   [ ] Viper (`github.com/spf13/viper`) for configuration
-    *   [ ] Zap (`go.uber.org/zap`) or configure standard `log/slog` for structured logging
-    *   [ ] UberFx (`go.uber.org/fx`) for dependency injection
-    *   [ ] Goquery (`github.com/PuerkitoBio/goquery`) for HTML parsing (needed for Previews)
-    *   [ ] QR Code library (e.g., `github.com/skip2/go-qrcode`)
-    *   Run `go mod tidy`
+*   [x] **Install Dependencies:** Add missing Go modules specified in `TECH-STACK.md`.
+    *   [x] GORM (`gorm.io/gorm` and TiDB driver `gorm.io/driver/mysql`)
+    *   [x] Temporal SDK (`go.temporal.io/sdk`)
+    *   [x] Viper (`github.com/spf13/viper`) for configuration
+    *   [x] Zap (`go.uber.org/zap`) or configure standard `log/slog` for structured logging
+    *   [x] UberFx (`go.uber.org/fx`) for dependency injection
+    *   [x] Goquery (`github.com/PuerkitoBio/goquery`) for HTML parsing (needed for Previews)
+    *   [x] QR Code library (e.g., `github.com/skip2/go-qrcode`)
+    *   [x] Run `go mod tidy`
 *   [ ] **Configuration:**
     *   Set up Viper (`server/internal/config/`) to load settings (e.g., DB DSN, server address, Temporal details) from environment variables or a config file.
 *   [ ] **Logging:**

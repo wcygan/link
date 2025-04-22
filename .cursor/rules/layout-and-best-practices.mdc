@@ -34,6 +34,7 @@ Standard Go project layout conventions are encouraged. Key directories include:
     *   Automated linting: `golangci-lint` (configure via `.golangci.yml`). Run with `make lint`.
 3.  **Dependency Management:**
     *   Use Go Modules (`go mod tidy`, `go get`).
+    *   **Important:** Ensure all Go module commands (`go get`, `go mod tidy`, `go install`, etc.) are executed within the `server/` directory, as this is where the project's `go.mod` file is located.
 4.  **Configuration:**
     *   Use libraries like `viper` or environment variables for configuration.
     *   Load configuration in `server/internal/config/`.
