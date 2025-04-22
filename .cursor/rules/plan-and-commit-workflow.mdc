@@ -1,0 +1,17 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Plan Review and Commit Workflow
+
+## Core Principle: Plan, Implement, Update Plan, Commit
+
+Adhere to the following workflow for all development tasks:
+
+1.  **Consult the Plan:** **BEFORE** starting any code change, review the [plan.md](mdc:plan.md) document. Identify the specific task(s) from the current phase or "Next Steps" section that you will be addressing.
+2.  **Implement Task:** Make the necessary code changes and add corresponding tests, following the project's best practices (like [incremental-testing](mdc:.cursor/rules/incremental-testing.mdc)).
+3.  **Update the Plan:** **AFTER** successfully implementing and testing the change, update the status of the completed task(s) in [plan.md](mdc:plan.md) (e.g., change `[ ]` to `[x]`).
+4.  **Commit Changes:** Stage and commit the completed work to git with a clear message describing the implemented task (often referencing the task from `plan.md`). Ensure the repository is clean before starting the next task.
+
+This ensures development stays aligned with the plan and progress is tracked effectively.
