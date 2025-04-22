@@ -1,0 +1,18 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Follow Development Plan
+
+## Core Principle: Adhere to `plan.md`
+
+All development efforts should strictly follow the phases, goals, and tasks outlined in the project's development plan document: [plan.md](mdc:plan.md).
+
+## Key Guidelines
+
+1.  **Phase-Driven Development:** Implement features according to the defined phases (`Phase 0`, `Phase 1`, `Phase 2`, etc.) in `plan.md`. Do not skip phases or implement features out of the planned order unless explicitly requested or a clear justification is provided and agreed upon.
+2.  **Current Focus:** Pay close attention to the "Next Steps (Immediate Focus)" section in `plan.md`. Prioritize tasks within the current active phase(s). As of the last update, the focus should be on completing **Phase 0: Foundation & Setup** before moving to **Phase 1: Core URL Shortening**.
+3.  **Task Completion:** Ensure all sub-tasks listed under a specific goal within a phase are addressed before considering that goal complete.
+4.  **Reference the Plan:** When proposing code changes, implementations, or next steps, explicitly reference the relevant section or task in `plan.md` that the work corresponds to.
+5.  **Plan Updates:** If deviations from the plan are necessary or if the plan needs updating based on new findings, modifications should be discussed and reflected in `plan.md` itself.
