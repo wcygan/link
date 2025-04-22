@@ -27,3 +27,11 @@ grpcui -plaintext localhost:8080
 ```
 
 This will open a web interface in your browser to interact with the API.
+
+You can also use `grpcurl` to test the gRPC endpoints:
+
+```bash
+grpcurl -plaintext -d '{
+  "originalUrl": "https://news.ycombinator.com/news"
+}' localhost:8080 link.v1.UrlService.ShortenURL
+```
